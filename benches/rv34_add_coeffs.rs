@@ -49,7 +49,7 @@ mod lu {
     pub fn add_coeffs(dst: &mut [u8], idx: usize, stride: usize, coeffs: &[i16]) {
         let out = &mut dst[idx..][..stride * 3 + 4];
         let coeffs = &coeffs[..16];
-        for (el, cf) in out.chunks_mut(stride).zip(coeffs.chunks(4)) {
+        for (el, cf) in out.chunks_mut(stride).take(4).zip(coeffs.chunks(4)) {
             el[0] = clip8((el[0] as i32) + (cf[0] as i32));
             el[1] = clip8((el[1] as i32) + (cf[1] as i32));
             el[2] = clip8((el[2] as i32) + (cf[2] as i32));
